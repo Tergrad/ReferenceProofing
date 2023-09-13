@@ -25,7 +25,7 @@ function getCitationPatterns(style) {
 
     if (style === "Julia Masterarbeit") {
         console.log("[Setting Julia Masterarbeit Patterns]");
-        patterns.citation = new RegExp("\\(vgl\\.? \\w+(\\/\\w+)*(\\/et al)? \\d{4}(, \\d+(\"f\"|\"ff\")?)*(; \\d{4}(, \\d+(\"f\"|\"ff\")?)*)*\\)", "gm");
+        patterns.citation = new RegExp("\((vgl\.|s\.\sauch|siehe\shierzu\sz\.B\.)*\s*([\w\s\-]+(?:\/[\w\s\-]+)*|Anhang\s[\w\.]+,\sAbs\.\s[\d\-,]+)(\s\d{4})*(\,\s[\d\-f]+)*(;\s[\w\s\-\/]+(\s\d{4})*(\,\s[\d\-f]+)*|;\sAnhang\s[\w\.]+,\sAbs\.\s[\d\-,]+)*\)", "gm");
         patterns.reference = new RegExp("^\\w+,\\s\\w+\\.\\s(\\d{4})", "gm");
         console.log("[Julia Masterarbeit Patterns Set Successfully]");
     } else {
