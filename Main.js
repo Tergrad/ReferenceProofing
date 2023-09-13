@@ -1,13 +1,18 @@
+console.log("[Script Start]");
+
 document.getElementById("docxFile").addEventListener("change", function() {
+    console.log("[docxFile Change Detected]");
     processDocx(this);
 });
 
 // Added event listener for button click
 document.querySelector("ActivateButton").addEventListener("click", function() {
+    console.log("[Check References Button Clicked]");
     const fileInput = document.getElementById("docxFile");
     if (fileInput.files.length) {
         processDocx(fileInput);
     } else {
+        console.log("[No Document Selected]");
         alert("Please select a document first.");
     }
 });
@@ -15,6 +20,7 @@ document.querySelector("ActivateButton").addEventListener("click", function() {
 
 
 function getCitationPatterns(style) {
+    console.log("[Getting Citation Patterns for]", style);
     // Define patterns object
     let patterns = {
         citation: /()/g,
@@ -30,29 +36,43 @@ function getCitationPatterns(style) {
 }
 
 function processDocx(fileInput) {
+    console.log("[Processing DOCX]");
     let reader = new FileReader();
 
     reader.onload = function(event) {
+        console.log("[File Reader Onload]");
         mammoth.extractRawText({ arrayBuffer: event.target.result })
-            .then(displayResult)
-            .catch(handleError);
+            .then(function(result) {
+                console.log("[Mammoth Text Extraction Success]");
+                displayResult(result);
+            })
+            .catch(function(err) {
+                console.log("[Mammoth Text Extraction Error]:", err);
+                handleError(err);
+            });
+    };
+
+    reader.onerror = function(error) {
+        console.log("[File Reader Error]:", error);
     };
 
     reader.readAsArrayBuffer(fileInput.files[0]);
 }
 
 function displayResult(result) {
+    console.log("[Displaying Result]");
     const text = result.value;
     const style = document.getElementById("refStyle").value;
     checkReferences(text, style);
 }
 
 function handleError(err) {
-    console.error(err);
+    console.log("[Error Handler]:", err);
     alert("Error processing the document.");
 }
 
 function checkReferences(text, style) {
+    console.log("[Checking References]");
     const patterns = getCitationPatterns(style);
 
     const inTextCitations = [...text.matchAll(patterns.citation)].map(match => match[1]);
@@ -68,8 +88,4 @@ function checkReferences(text, style) {
 
     document.getElementById("potentialMisses").innerText = "Potential Misses: " + potentialMisses.join(", ");
 }
-
-document.getElementById("docxFile").addEventListener("change", function() {
-    processDocx(this);
-});
-
+console.log("[Script End - Event Listeners Waiting]");
