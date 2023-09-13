@@ -21,3 +21,11 @@
     transition: max-height 0.2s ease-out;
     background-color: #f9f9f9;
 }
+
+
+.three-column-list {
+    column-count: 3;
+    list-style-type: none;  /* removes bullet points */
+    margin: 0;
+    padding: 0;
+}
