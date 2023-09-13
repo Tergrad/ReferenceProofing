@@ -3,7 +3,7 @@ document.getElementById("docxFile").addEventListener("change", function() {
 });
 
 // Added event listener for button click
-document.querySelector("button").addEventListener("click", function() {
+document.querySelector("ActivateButton").addEventListener("click", function() {
     const fileInput = document.getElementById("docxFile");
     if (fileInput.files.length) {
         processDocx(fileInput);
