@@ -1,3 +1,19 @@
+document.getElementById("docxFile").addEventListener("change", function() {
+    processDocx(this);
+});
+
+// Added event listener for button click
+document.querySelector("button").addEventListener("click", function() {
+    const fileInput = document.getElementById("docxFile");
+    if (fileInput.files.length) {
+        processDocx(fileInput);
+    } else {
+        alert("Please select a document first.");
+    }
+});
+
+
+
 function getCitationPatterns(style) {
     // Define patterns object
     let patterns = {
