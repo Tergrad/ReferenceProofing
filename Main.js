@@ -1,12 +1,8 @@
 console.log("[Script Start]");
 
-document.getElementById("docxFile").addEventListener("change", function() {
-    console.log("[docxFile Change Detected]");
-    processDocx(this);
-});
 
 // Added event listener for button click
-document.querySelector("ActivateButton").addEventListener("click", function() {
+document.querySelector(".ActivateButton").addEventListener("click", function() {
     console.log("[Check References Button Clicked]");
     const fileInput = document.getElementById("docxFile");
     if (fileInput.files.length) {
@@ -28,12 +24,19 @@ function getCitationPatterns(style) {
     };
 
     if (style === "APA") {
-        patterns.citation = new RegExp("(?<original>(?:(?:\(|\; ?)(?<author>(?=[^\n\(]*,[0-9 ]*[^\(\)]*\))(?!:[^\n\(\)\[\]]+\[.*\].*(?:\d{4}[a-z]?|[ns]\.\s?d\.|\d{4}[-–]\d{4}|\d{4}\, ?\w+ \d{1,2}))[^\n\(\)]*?(?:\b\p{Lu}[\p{Ll} \_0-9]+\b,\s+(?:\p{Lu}\.){1,3}\s+(?:(?:&|,|\.\.\.|)\s*)?)*(?:\((?:Eds?\.|Trad\.|Comp\.).*\))?)(?:,? ?(?<year>(?:\d{4}[a-z]?(?:, ?)?)+))(?:[, ]*pp?\.[\s]*(?<page>\d+[\-–]?\d*))?(?:, para\.[\s]*(?<paragraph>\d+))?))|(?:(?<pre>(?:[\p{Ll} \_0-9]*)( [\w]{1,6} )?)(?=\.?\p{Lu}\w+)(?<author1>(?<a1>(?:[^\n\(\)\.0-9]+)|(?:(?:[A-Z]\.\s?)?\b\p{Lu}[\p{Ll} \_0-9]+\b\s*et al\.? ?))?(?<a2>\b\p{Lu}[\p{Ll} \_0-9]+\b,\s+(?:\p{Lu}\.){1,3}\s+(?:(?:&|,|\.\.\.|)\s*)?)*(?:\((?:Eds?\.|Trad\.|Comp\.).*\))?)(\((?<year1>(?:\d{4}[a-z]?(?:, ?)?)+)\)))", "gmi"); // Insert your complex regex here
+        console.log("[Setting APA Patterns]");
+        patterns.citation = new RegExp("^\\w+,\\s\\w+\\.", "gm"); // Insert your complex regex here
         patterns.reference = new RegExp("^\\w+,\\s\\w+\\.", "gm");
+        console.log("[APA Patterns Set Successfully]");
+        
     }
 
     return patterns;
 }
+
+
+// FULL REGEX
+// "(?<original>(?:(?:\(|\; ?)(?<author>(?=[^\n\(]*,[0-9 ]*[^\(\)]*\))(?!:[^\n\(\)\[\]]+\[.*\].*(?:\d{4}[a-z]?|[ns]\.\s?d\.|\d{4}[-–]\d{4}|\d{4}\, ?\w+ \d{1,2}))[^\n\(\)]*?(?:\b\p{Lu}[\p{Ll} \_0-9]+\b,\s+(?:\p{Lu}\.){1,3}\s+(?:(?:&|,|\.\.\.|)\s*)?)*(?:\((?:Eds?\.|Trad\.|Comp\.).*\))?)(?:,? ?(?<year>(?:\d{4}[a-z]?(?:, ?)?)+))(?:[, ]*pp?\.[\s]*(?<page>\d+[\-–]?\d*))?(?:, para\.[\s]*(?<paragraph>\d+))?))|(?:(?<pre>(?:[\p{Ll} \_0-9]*)( [\w]{1,6} )?)(?=\.?\p{Lu}\w+)(?<author1>(?<a1>(?:[^\n\(\)\.0-9]+)|(?:(?:[A-Z]\.\s?)?\b\p{Lu}[\p{Ll} \_0-9]+\b\s*et al\.? ?))?(?<a2>\b\p{Lu}[\p{Ll} \_0-9]+\b,\s+(?:\p{Lu}\.){1,3}\s+(?:(?:&|,|\.\.\.|)\s*)?)*(?:\((?:Eds?\.|Trad\.|Comp\.).*\))?)(\((?<year1>(?:\d{4}[a-z]?(?:, ?)?)+)\)))", "gmi"
 
 function processDocx(fileInput) {
     console.log("[Processing DOCX]");
@@ -44,6 +47,7 @@ function processDocx(fileInput) {
         mammoth.extractRawText({ arrayBuffer: event.target.result })
             .then(function(result) {
                 console.log("[Mammoth Text Extraction Success]");
+                console.log("Extracted text:", result.value); // Diagnostic log
                 displayResult(result);
             })
             .catch(function(err) {
