@@ -23,11 +23,11 @@ function getCitationPatterns(style) {
         reference: /^()/gm
     };
 
-    if (style === "APA") {
-        console.log("[Setting APA Patterns]");
+    if (style === "Julia Masterarbeit") {
+        console.log("[Setting Julia Masterarbeit Patterns]");
         patterns.citation = new RegExp("\\((\\w+)\\s(\\d{4})(?:,\\s(\\d+))?\\)", "gm");
         patterns.reference = new RegExp("^\\w+,\\s\\w+\\.", "gm");
-        console.log("[APA Patterns Set Successfully]");
+        console.log("[Julia Masterarbeit Patterns Set Successfully]");
     } else {
         console.error("Unrecognized style:", style);
         throw new Error("Unrecognized citation style provided.");
@@ -75,7 +75,7 @@ function displayResult(result) {
     const text = result.value;
     const style = document.getElementById("refStyle").value;
     checkReferences(text, style);
-}
+}   
 
 function handleError(err) {
     console.log("[Error Handler]:", err);
@@ -105,23 +105,45 @@ function checkReferences(text, style) {
         console.log("[Preparing to Display Missing References]");
         const missingReferences = inTextCitations.filter(cite => !referenceList.includes(cite));
 
-        console.log("[Missing References]:", missingReferences);
-        document.getElementById("missingReferences").innerText = missingReferences.join(", ");
 
-        console.log("[All Detected Citations]:", inTextCitations);
-        document.getElementById("allDetected").innerText = inTextCitations.join(", ");
+
+        // Updating Missing References on the UI
+        const missingReferencesContainer = document.getElementById("missingReferences");
+        missingReferencesContainer.innerHTML = "";
+        missingReferences.forEach(ref => {
+            const divElement = document.createElement("div");
+            divElement.textContent = ref;
+            missingReferencesContainer.appendChild(divElement);
+        });
+
+        // Updating All Detected Citations on the UI
+        const allDetectedContainer = document.getElementById("allDetected");
+        allDetectedContainer.innerHTML = "";
+        inTextCitations.forEach(citation => {
+            const divElement = document.createElement("div");
+            divElement.textContent = citation;
+            allDetectedContainer.appendChild(divElement);
+        });
 
         const potentialPattern = /\(?[A-Za-z0-9]+, \d{4}\)?/g;
         const potentialMisses = [...text.matchAll(potentialPattern)].map(match => match[0]).filter(cite => !inTextCitations.includes(cite));
 
-        console.log("[Potential Misses]:", potentialMisses);
-        document.getElementById("potentialMisses").innerText = potentialMisses.join(", ");
+        // Updating Potential Misses on the UI
+        const potentialMissesContainer = document.getElementById("potentialMisses");
+        potentialMissesContainer.innerHTML = "";
+        potentialMisses.forEach(miss => {
+            const divElement = document.createElement("div");
+            divElement.textContent = miss;
+            potentialMissesContainer.appendChild(divElement);
+        });
+
     } catch (error) {
         console.error("[Error in checkReferences]:", error);
     }
 
     expandCollapsibles();
 }
+
 
 
 function expandCollapsibles() {

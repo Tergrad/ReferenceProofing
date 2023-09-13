@@ -12,7 +12,7 @@
     <div class="upload-section">
         <input type="file" id="docxFile">
         <select id="refStyle">
-            <option value="APA">APA</option>
+            <option value="Julia Masterarbeit">Julia Masterarbeit</option>
             <!-- Add more styles as options -->
         </select>
         <button class="ActivateButton">Check References</button>
@@ -21,17 +21,17 @@
     <div class="results-section">
         <button class="collapsible">Missing References</button>
         <div class="content">
-            <p id="missingReferences"></p>
+            <div id="missingReferences" class="three-column-list"></div>
         </div>
 
         <button class="collapsible">All Detected Citations</button>
         <div class="content">
-            <p id="allDetected"></p>
+            <div id="allDetected" class="three-column-list"></div>
         </div>
 
         <button class="collapsible">Potential Misses</button>
         <div class="content">
-            <p id="potentialMisses"></p>
+            <div id="potentialMisses" class="three-column-list"></div>
         </div>
     </div>
 
