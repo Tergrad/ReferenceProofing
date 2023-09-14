@@ -1,0 +1,111 @@
+
+body {
+    background-image: linear-gradient(#eae1f9, #e9defb); 
+}
+
+.upload-section {
+padding-bottom: 15px;
+}
+
+h2{
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px; /* Adjust to your preference */
+}
+
+.ActivateButton {
+    background-color:rgba(137, 25, 141, 0.455);
+    margin-left: 3%;
+}
+
+
+.button-container {
+    text-align: center; /* Center the button */
+    margin-top: 1vh; /* Space above the button */
+    margin-bottom: 2vh;
+}
+
+.columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 1;
+    margin-right: 1%; 
+    height: 85vh;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    position: relative;
+    padding-top: 5px; /* Space at the top for the input and label */
+    background-image: linear-gradient(rgba(188, 108, 169, 0.197), rgba(109, 181, 176, 0.362));  
+}
+
+
+.column:last-child {
+    margin-right: 0; /* So the last column doesn’t have a right margin */
+}
+
+.column input[type="file"], .column label {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Adjust to your preference */
+    align-items: center;
+}
+
+#referencesFile {
+    align-items: center;
+}
+
+#referenceList {
+    list-style-type: none; /* Removes the bullet points */
+    padding-left: 0px; /* Removes default padding */
+    text-align: justify;
+}
+
+#referenceList input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+}
+
+
+#referenceList input[type="checkbox"] {
+    position: absolute;
+    left: 1px;   /* Position the checkbox 10px from the left of the container */
+    top: 10%; 
+    transform: translateY(-50%);
+    padding-right: 30px;
+}
+
+#referenceList li {
+    position: relative;
+    padding-left: 30px; /* This creates space for the checkbox */
+    margin-bottom: 1vh;
+}
+
+#allDetected div label {
+    text-align: left;
+    display: inline-block; /* Makes sure label behaves as a block-level item for alignment purposes but stays inline with checkbox */
+    width: calc(100% - 40px); /* Assuming checkbox and its margin take up about 30px; adjust as necessary */
+}
+
+
+#allDetected div {
+    display: block;
+    padding-left: 30px; /* Make space for the checkbox, matching the right list */
+    text-align: left;
+    list-style-type: none; /* Remove any default styling, like bullets */
+    margin-bottom: 1vh; /* Spacing between items */
+    position: relative; /* Relative positioning to assist with absolute positioning inside */
+}
+
+#allDetected input[type="checkbox"] {
+    position: absolute;
+    left: 1px;
+    top: 17%; 
+    margin-right: 5px;
+    transform: translateY(-50%);
+}
+
+#allDetected div.checked label {
+    text-decoration: line-through; /* Crossed out when checked */
+}

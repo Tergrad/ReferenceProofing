@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julias Masterarbeit Reference Checker</title>
+    <link rel="stylesheet" href="/Julias Masterarbeit/Masterarbeit.css">
+</head>
+<body>
+    
+        <h1>Julias Masterarbeitsquellen</h1>
+        
+          
+        <div class="columns">
+            <!-- Column for in-text citations -->
+            <div class="column">
+                <h2>Zitate</h2>
+                <input type="file" id="docxFile">
+                
+                
+                <div id="allDetected"></div>
+            </div>
+            
+            <!-- Column for hardcoded references -->
+            <div class="column">
+                <h2>Quellen</h2>
+                <input type="file" id="referencesFile">
+                               
+                <ul id="referenceList">
+                    <!-- Reference items go here... -->
+                </ul>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <button class="ActivateButton">Check References</button>
+        </div>
+        
+
+
+
+
+
+
+
+    <script src="Masterarbeit.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js" integrity="sha512-sG5Q7boJL+ft/weuz6Mmi9XBD+bEzE9AI2FMP4YMFxp3FpTFUQSQQm5K5cSgJCyed6bWs3W8f8h0lp36lHXhQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</body>
+</html>
